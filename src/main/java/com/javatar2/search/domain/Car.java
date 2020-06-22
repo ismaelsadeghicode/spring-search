@@ -1,6 +1,7 @@
 package com.javatar2.search.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Esmaeil Sadeghi, 6/22/2020 11:39 AM
@@ -8,7 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cars")
-public class Car {
+public class Car implements Serializable {
+
+    private static final long serialVersionUID = -3187480027431265380L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

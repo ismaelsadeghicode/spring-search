@@ -1,0 +1,1 @@
+insert into OPTIONS (ID, HAS_GPS, TRANSMISSION) values (1,'HAS_GPS','TRANSMISSION')

@@ -6,15 +6,15 @@ import com.sipios.springsearch.anotation.SearchSpec;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * @author Esmaeil Sadeghi, 6/22/2020 11:41 AM
  */
-@Controller
+@RestController
+@RequestMapping("car")
 public class CarController {
     private final CarRepository carRepository;
 
@@ -22,8 +22,18 @@ public class CarController {
         this.carRepository = carRepository;
     }
 
-    @GetMapping("/cars")
+    @GetMapping()
     public ResponseEntity<List<Car>> searchForCars(@SearchSpec Specification<Car> specs) {
         return new ResponseEntity<>(carRepository.findAll(Specification.where(specs)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public void remove(@PathVariable("id") int id) {
+        carRepository.deleteById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Car> searchForCars(Car car) {
+        return new ResponseEntity<>(carRepository.save(car), HttpStatus.OK);
     }
 }
